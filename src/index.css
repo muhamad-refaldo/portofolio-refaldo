@@ -1,93 +1,54 @@
-/* --- 1. FONT IMPORT (WAJIB PALING ATAS) --- */
-@import url('https://
-
-/* --- 2. TAILWIND IMPORT (SETELAH FONT) --- */
 @import "tailwindcss";
 
-/* --- 3. SETUP FONT FAMILY --- */
 @theme {
-  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-sans: 'Space Grotesk', sans-serif;
 }
 
-body {
-  font-family: "Plus Jakarta Sans", sans-serif;
+@layer base {
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
 }
 
-/* --- 4. CUSTOM SCROLLBAR --- */
-/* Default (Light Mode) */
+/* Noise Overlay */
+.bg-noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  /* URL SVG harus dalam satu baris dan ditutup kutip ganda */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #f3f4f6;
+  background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #9ca3af;
-  border-radius: 4px;
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background-color: rgba(59, 130, 246, 0.8);
 }
 
-/* Dark Mode Scrollbar Override */
-.dark ::-webkit-scrollbar-track {
-  background: #050505;
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #333;
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* --- 5. ANIMASI KEYFRAMES --- */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-up {
-  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-.modal-overlay {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-@keyframes scaleUp {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-.modal-content {
-  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* --- 6. GLASSMORPHISM UTILITIES --- */
-/* Base Glass Style */
-.glass-card {
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.7); /* Light default */
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(59, 130, 246, 0.2);
-  transform: translateY(-2px);
-}
-
-/* Dark Mode Glass Override */
-.dark .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.dark .glass-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.1);
+.scrollbar-hide {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
 }
